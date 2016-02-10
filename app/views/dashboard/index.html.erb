@@ -5,28 +5,36 @@
   </div>
 
   <div class="user-info">
-    <li>Username: <%= link_to @user.username, 'https://github.com/xbell' %></li>
-    <li>Avatar: <%= image_tag @user.avatar_url %></li>
-    <li>Location: <%= @g_user[:location] %></li>
-    <li>Followers: <%= @g_user[:followers] %></li>
-    <li>Following: <%= @g_user[:following] %></li>
-    <li>Public Repos: <%= @g_user[:public_repos] %></li>
-    <li>Public Gists: <%= @g_user[:public_gists] %></li>
-    <li>Total Repos: <%= @g_user.rels[:repos].get.data.count %></li>
-    <li>Total Gists: <%= @g_user.rels[:gists].get.data.count %></li>
-    <li>Total Private Repos:
-      <% t = 0 %>
-      <% a = 0 %>
-      <% @g_user.rels[:repos].get.data.each do |priv| %>
-        <% if @g_user.rels[:repos].get.data[a][:private] == true %>
-          <% t += 1 %>
-          <% a += 1 %>
-        <% else %>
-          <% a += 1 %>
-        <% end %>
-      <% end %>
-      <%= t %>
-    </li>
+    <div class="all-info">
+      <div class="avatar">
+        <li><%= image_tag @user.avatar_url %></li>
+        <li><%= link_to @user.username, 'https://github.com/xbell' %></li>
+      </div>
+      <div class="info">
+        <li>Location: <%= @client.user.location %></li>
+        <li>Followers: <%= @client.user.followers %></li>
+        <li>Following: <%= @client.user.following %></li>
+        <!-- <li>Public Gists: <%= @client.user.public_gists %></li>
+        <li>Public Repos: <%= @client.user.public_repos %></li> -->
+        <li>Total Repos Collaborated: <%= @client.user.collaborators %></li>
+        <li>Total Repos Collaborated On:
+          <% c = 0 %>
+          <% r = 0 %>
+          <% @client.repos.each do |collabs| %>
+            <% if @client.collaborators("#{@user.username}/#{@client.repos[r].name}").count > 1 %>
+              <% c += 1 %>
+              <% r += 1 %>
+            <% else %>
+              <% r += 1 %>
+            <% end %>
+          <% end %>
+          <%= c %>
+        </li>
+        <li>Total Gists: <%= @client.gists.count %></li>
+        <li>Total Private Repos: <%= @client.user.owned_private_repos %></li>
+        <li>Total Repos: <%= @client.repos.count %></li>
+      </div>
+    </div>
   </div>
 
 </div>

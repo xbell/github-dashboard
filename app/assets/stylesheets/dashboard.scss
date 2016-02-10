@@ -8,11 +8,35 @@ body.dashboard {
 
 .dashboard-header {
   text-align: center;
-  font-size: 20px;
+  font-size: 30px;
   color: #F0B67F;
   margin-top: 50px;
 }
 
-.user-info img {
-  width: 200px;
+.user-info {
+  list-style: none;
+  // display: inline-block;
+}
+
+.all-info {
+  text-align: center;
+}
+
+.avatar {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 25px;
+}
+
+.avatar img {
+  width: 136px;
+}
+
+.info {
+  text-align: left;
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 15px;
+  vertical-align: top;
+  color: #FE5F55;
 }
