@@ -5,9 +5,28 @@
   </div>
 
   <div class="user-info">
-    <li><%= @user.username %></li>
-    <li><%= image_tag @user.avatar_url %></li>
-    <li><%= @g_user[:location] %></li>
+    <li>Username: <%= link_to @user.username, 'https://github.com/xbell' %></li>
+    <li>Avatar: <%= image_tag @user.avatar_url %></li>
+    <li>Location: <%= @g_user[:location] %></li>
+    <li>Followers: <%= @g_user[:followers] %></li>
+    <li>Following: <%= @g_user[:following] %></li>
+    <li>Public Repos: <%= @g_user[:public_repos] %></li>
+    <li>Public Gists: <%= @g_user[:public_gists] %></li>
+    <li>Total Repos: <%= @g_user.rels[:repos].get.data.count %></li>
+    <li>Total Gists: <%= @g_user.rels[:gists].get.data.count %></li>
+    <li>Total Private Repos:
+      <% t = 0 %>
+      <% a = 0 %>
+      <% @g_user.rels[:repos].get.data.each do |priv| %>
+        <% if @g_user.rels[:repos].get.data[a][:private] == true %>
+          <% t += 1 %>
+          <% a += 1 %>
+        <% else %>
+          <% a += 1 %>
+        <% end %>
+      <% end %>
+      <%= t %>
+    </li>
   </div>
 
 </div>
