@@ -37,14 +37,38 @@
     </div>
   </div>
 
-  <div class="last-10">
-    <ol>
-      <% sorted = @client.repos.sort_by &:created_at %>
-      <% last_ten = sorted.last(10) %>
-      <% last_ten.each do |n| %>
-        <li><%= n.name.capitalize %></li>
-      <% end %>
-    </ol>
+  <div class="most-recents">
+    <div class="recents">
+      <div class="recent-repos">
+        <h3>Most Recent Repositories</h3>
+        <% if @client.repos.count == 0 %>
+          <%= "You have no repositories." %>
+        <% else %>
+          <ol>
+            <% sorted_r = @client.repos.sort_by &:created_at %>
+            <% last_ten_r = sorted_r.last(10) %>
+            <% last_ten_r.each do |n| %>
+              <li><%= n.name.capitalize %></li>
+            <% end %>
+          </ol>
+        <% end %>
+      </div>
+
+      <div class="recent-gists">
+        <h3>Most Recent Gists</h3>
+        <% if @client.gists.count == 0 %>
+          <%= "You have no gists." %>
+        <% else %>
+          <ol>
+            <% sorted_g = @client.gists.sort_by &:created_at %>
+            <% last_ten_g = sorted_g.last(10) %>
+            <% last_ten_g.each do |n| %>
+              <li><%= n.files %></li>
+            <% end %>
+          </ol>
+        <% end %>
+      </div>
+    </div>
   </div>
 
   <div class="chart-container" id="chart-container">

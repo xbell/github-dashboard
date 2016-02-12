@@ -51,3 +51,25 @@ body.dashboard {
 .highcharts-background {
   fill: #C7EFCF;
 }
+
+.recents {
+  text-align: center;
+  color: #FE5F55;
+}
+
+.recents h3 {
+  color: #F0B67F;
+}
+
+.recent-repos {
+  display: inline-block;
+  text-align: left;
+  margin-right: 20px;
+}
+
+.recent-gists {
+  display: inline-block;
+  text-align: left;
+  vertical-align: top;
+  margin-left: 20px;
+}
