@@ -37,4 +37,19 @@
     </div>
   </div>
 
-</div>
+  <div class="last-10">
+    <ol>
+      <% sorted = @client.repos.sort_by &:created_at %>
+      <% last_ten = sorted.last(10) %>
+      <% last_ten.each do |n| %>
+        <li><%= n.name.capitalize %></li>
+      <% end %>
+    </ol>
+  </div>
+
+  <div class="chart-container" id="chart-container">
+    <div class="lang-chart" id="lang-chart">
+
+    </div>
+
+  </div>

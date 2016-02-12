@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback", to: "sessions#create"
   get "/sign-out", to: "sessions#sign_out"
 
-  get "dashboard", to: "dashboard#index", as: :dashboard
+  get "/dashboard", to: "dashboard#index", as: :dashboard
+
+  get "/charts", to: "dashboard#language"
 
 
   # The priority is based upon order of creation: first created -> highest priority.
