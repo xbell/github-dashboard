@@ -14,7 +14,7 @@ class DashboardController < ApplicationController
     # raise
   end
 
-  def language
+  def languages
     @user = User.find(session[:user_id])
     @client = Octokit::Client.new(:access_token => "#{@user.token}")
     arr = []
@@ -31,6 +31,29 @@ class DashboardController < ApplicationController
     end
     @count = count.to_json
     render json: @count
+  end
+
+  def events
+    @user = User.find(session[:user_id])
+    @client = Octokit::Client.new(:access_token => "#{@user.token}")
+    last_events = @client.user_events("#{@user.username}").sort_by &:created_at
+    events_arr = []
+    last_events.last(300).each do |event|
+      events_arr << event.type
+    end
+    events = Hash.new(0)
+    events_arr.each do |type|
+      if type
+        events[type] += 1
+      else
+        events["Other"] += 1
+      end
+    end
+    @events = events.to_json
+    render json: @events
+  end
+
+end
 
     # another way to do above with array
     # <% counts = [] %>
@@ -50,6 +73,3 @@ class DashboardController < ApplicationController
     #
     # <%= arr.to_set %>
     # <%= counts %>
-  end
-
-end

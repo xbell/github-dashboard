@@ -46,7 +46,7 @@
         <% else %>
           <ol>
             <% sorted_r = @client.repos.sort_by &:created_at %>
-            <% last_ten_r = sorted_r.last(10) %>
+            <% last_ten_r = sorted_r.last(10).reverse %>
             <% last_ten_r.each do |n| %>
               <li><%= n.name.capitalize %></li>
             <% end %>
@@ -71,8 +71,19 @@
     </div>
   </div>
 
+  <div class="events">
+    <!-- <% last_events = @client.user_events("#{@user.username}").sort_by &:created_at %>
+    <% last_events.last(300).each do |event| %>
+      <%= event.type %>
+    <% end %> -->
+  </div>
+
   <div class="chart-container" id="chart-container">
     <div class="lang-chart" id="lang-chart">
+
+    </div>
+
+    <div class"event-chart" id="event-chart">
 
     </div>
 

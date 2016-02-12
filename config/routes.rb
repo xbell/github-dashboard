@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   get "/dashboard", to: "dashboard#index", as: :dashboard
 
-  get "/charts", to: "dashboard#language"
+  get "/languages", to: "dashboard#languages"
+
+  get "/events", to: "dashboard#events"
 
 
   # The priority is based upon order of creation: first created -> highest priority.
