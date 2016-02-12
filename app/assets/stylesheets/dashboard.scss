@@ -4,6 +4,7 @@
 
 body.dashboard {
   background-color: #C7EFCF;
+  font-family: "Maven Pro", sans-serif;
 }
 
 .dashboard-header {
@@ -15,7 +16,6 @@ body.dashboard {
 
 .user-info {
   list-style: none;
-  // display: inline-block;
 }
 
 .all-info {
@@ -41,24 +41,16 @@ body.dashboard {
   color: #FE5F55;
 }
 
-.lang-chart {
-  width: 100%;
-  // margin: 0 auto;
-  display: block;
-  margin-top: 50px;
-}
-
-.highcharts-background {
-  fill: #C7EFCF;
-}
-
 .recents {
   text-align: center;
   color: #FE5F55;
+  margin-top: 35px;
+  font-size: 20px;
 }
 
 .recents h3 {
   color: #F0B67F;
+  font-size: 30px;
 }
 
 .recent-repos {
@@ -74,9 +66,18 @@ body.dashboard {
   margin-left: 20px;
 }
 
+.highcharts-background {
+  fill: #C7EFCF;
+}
+
+.lang-chart {
+  width: 100%;
+  display: block;
+  margin-top: 50px;
+}
+
 .event-chart {
   width: 100%;
-  // margin: 0 auto;
   display: block;
   margin-top: 50px;
 }

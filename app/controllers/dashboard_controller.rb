@@ -6,12 +6,6 @@ class DashboardController < ApplicationController
   def index
     @user = User.find(session[:user_id])
     @client = Octokit::Client.new(:access_token => "#{@user.token}")
-    # @g_user = @client.user
-    # list = []
-    # @client.repos.each do |repo|
-    #   list << repo.language
-    # end
-    # raise
   end
 
   def languages
@@ -31,29 +25,6 @@ class DashboardController < ApplicationController
     end
     @count = count.to_json
     render json: @count
-  end
-
-  def events
-    @user = User.find(session[:user_id])
-    @client = Octokit::Client.new(:access_token => "#{@user.token}")
-    last_events = @client.user_events("#{@user.username}").sort_by &:created_at
-    events_arr = []
-    last_events.last(300).each do |event|
-      events_arr << event.type
-    end
-    events = Hash.new(0)
-    events_arr.each do |type|
-      if type
-        events[type] += 1
-      else
-        events["Other"] += 1
-      end
-    end
-    @events = events.to_json
-    render json: @events
-  end
-
-end
 
     # another way to do above with array
     # <% counts = [] %>
@@ -73,3 +44,30 @@ end
     #
     # <%= arr.to_set %>
     # <%= counts %>
+  end
+
+  def events
+    @user = User.find(session[:user_id])
+    @client = Octokit::Client.new(:access_token => "#{@user.token}")
+    # last_events = @client.user_events("#{@user.username}").sort_by &:created_at
+    # above only gets back 30 events
+
+    event_arr = []
+    events_pg1 = @client.user_events("#{@user.username}", {:per_page => 100, :page => 1})
+    events_pg2 = @client.user_events("#{@user.username}", {:per_page => 100, :page => 2})
+    events_pg3 = @client.user_events("#{@user.username}", {:per_page => 100, :page => 3})
+    event_arr = events_pg1 + events_pg2 + events_pg3
+
+    event_types = []
+    event_arr.each do |event|
+      event_types << event.type
+    end
+    events = Hash.new(0)
+    event_types.each do |type|
+      events[type] += 1
+    end
+    @events = events.to_json
+    render json: @events
+  end
+
+end

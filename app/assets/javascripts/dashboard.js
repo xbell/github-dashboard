@@ -23,7 +23,12 @@ $(function() {
         }
       },
       title: {
-        text: "Primary Language Used"
+        text: "Primary Language Used",
+        style: {
+          color: "#F0B67F",
+          fontFamily: 'Maven Pro, sans-serif',
+          fontSize: "30px"
+        }
       },
       series: [{
         name: "Language",
@@ -56,7 +61,12 @@ $(function() {
         }
       },
       title: {
-        text: "Last 30 Events"
+        text: "Lastest Events (up to 300)",
+        style: {
+          color: "#F0B67F",
+          fontFamily: 'Maven Pro, sans-serif',
+          fontSize: "30px"
+        }
       },
       series: [{
         name: "Event",
